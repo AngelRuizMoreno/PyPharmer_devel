@@ -27,6 +27,7 @@ def get_nglview(pharmacophore,receptor=True,ligand=True,arrow_norm=2.0,arrow_rad
     tmp_view=nglview.NGLWidget()
     arrow_norm=np.sqrt(arrow_norm)
 
+
     if pharmacophore.with_receptor and receptor:
         view_with_receptor=True
         tmp_receptor_file = tempfile.NamedTemporaryFile(mode='w+',delete=False,suffix='.pdb')
@@ -45,7 +46,7 @@ def get_nglview(pharmacophore,receptor=True,ligand=True,arrow_norm=2.0,arrow_rad
 
     for point in pharmacophore.points:
         color=color_code[point.name]
-        tmp_view.shape.add_sphere(point.position.tolist(),color,point.radius,point.name)
+        tmp_sphere=tmp_view.shape.add_sphere (point.position.tolist(),color,point.radius,point.name)
         if point.svector is not None:
             source_array=point.position
             end_array=(point.position+arrow_norm*point.svector)
