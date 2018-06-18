@@ -1,5 +1,6 @@
 import numpy as np
 import simplejson as json
+from pprint import pprint
 
 
 # Descriptors list:
@@ -32,118 +33,132 @@ class Descriptors:
         if enabled is True:
 
              if 'points' in tmp_json_keys:
+
+                points = []
+
                 for json_object in tmp_json.get ('points'):
 
                     if json_object.get ('enabled')==True:
                         name=descriptors_list [json_object.get ('name')]
                         vector=json_object.get ('vector')
                         vector_on=json_object.get ('vector_on')
-            
+
                         if 'vector' and 'vector_on' in json_object.keys ():
                             if vector_on ==1:
                                 for element in vector:
-                                    descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                                    element['x'], element['y'],element['z']])
-                                    print (descriptor)
+                                    descriptor =([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), element['x'], element['y'],element['z']])
+
+                                points.append (descriptor)
 
                         if 'vector' and 'vector_on' in json_object.keys ():
                             if vector_on ==0:
                                 vector=[0]
-                                descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                    vector[0],vector[0],vector[0]])
-                                print (descriptor)
-            
+                                descriptor=([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), vector[0],vector[0],vector[0]])
+                                points.append (descriptor)
+
                         if 'vector' and not 'vector_on' in json_object.keys ():
                             if vector!=None:
                                 for element in vector:
-                                    descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                                    element['x'], element['y'],element['z']])
-                                    print (descriptor)
+                                    descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), element['x'], element['y'],element['z']])
+                                points.append (descriptor)
+
                             if vector==None:
                                 vector=[0]
-                                descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                    vector[0],vector[0],vector[0]])
-                                print (descriptor)
+                                descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), vector[0],vector[0],vector[0]])
+                                points.append (descriptor)
+
+                points.append (descriptor)
+                print (points)
+
         if enabled is False:
 
-            if 'points' in tmp_json_keys:
-                for json_object in tmp_json.get ('points'):
- 
-                    if json_object.get ('enabled')==False:
-                        name=descriptors_list [json_object.get ('name')]
-                        vector=json_object.get ('vector')
-                        vector_on=json_object.get ('vector_on')
-            
-                        if 'vector' and 'vector_on' in json_object.keys ():
-                            if vector_on ==1:
-                                for element in vector:
-                                    descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                                    element['x'], element['y'],element['z']])
-                                    print (descriptor)
+                        if 'points' in tmp_json_keys:
 
-                        if 'vector' and 'vector_on' in json_object.keys ():
-                            if vector_on ==0:
-                                vector=[0]
-                                descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                    vector[0],vector[0],vector[0]])
-                                print (descriptor)
-            
-                        if 'vector' and not 'vector_on' in json_object.keys ():
-                            if vector!=None:
-                                for element in vector:
-                                    descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                                    element['x'], element['y'],element['z']])
-                                    print (descriptor)
-                            if vector==None:
-                                vector=[0]
-                                descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                    vector[0],vector[0],vector[0]])
-                                print (descriptor)
+                            points = []
+
+                            for json_object in tmp_json.get ('points'):
+
+                                if json_object.get ('enabled')==False:
+                                    name=descriptors_list [json_object.get ('name')]
+                                    vector=json_object.get ('vector')
+                                    vector_on=json_object.get ('vector_on')
+
+                                    if 'vector' and 'vector_on' in json_object.keys ():
+                                        if vector_on ==1:
+                                            for element in vector:
+                                                descriptor=([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), element['x'], element['y'],element['z']])
+                                            points.append (descriptor)
+
+                                    if 'vector' and 'vector_on' in json_object.keys ():
+                                        if vector_on ==0:
+                                            vector=[0]
+                                            descriptor=([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), vector[0],vector[0],vector[0]])
+                                            points.append (descriptor)
+
+                                    if 'vector' and not 'vector_on' in json_object.keys ():
+                                        if vector!=None:
+                                            for element in vector:
+                                                descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),element['x'], element['y'],element['z']])
+                                            points.append (descriptor)
+
+                                        if vector==None:
+                                            vector=[0]
+                                            descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),vector[0],vector[0],vector[0]])
+                                            points.append (descriptor)
+
+                            points.append (descriptor)
+                            print (points)
 
         if all_points is True:
 
 
-            if 'points' in tmp_json_keys:
-                for json_object in tmp_json.get ('points'):
-                    name=descriptors_list [json_object.get ('name')]
-                    vector=json_object.get ('vector')
-                    vector_on=json_object.get ('vector_on')
-        
-                    if 'vector' and 'vector_on' in json_object.keys ():
-                        if vector_on ==1:
-                            for element in vector:
-                                descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                                element['x'], element['y'],element['z']])
-                                print (descriptor)
+                        if 'points' in tmp_json_keys:
 
-                    if 'vector' and 'vector_on' in json_object.keys ():
-                        if vector_on ==0:
-                            vector=[0]
-                            descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                vector[0],vector[0],vector[0]])
-                            print (descriptor)
-        
-                    if 'vector' and not 'vector_on' in json_object.keys ():
-                        if vector!=None:
-                            for element in vector:
-                                descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                                element['x'], element['y'],element['z']])
-                                print (descriptor)
-                        if vector==None:
-                            vector=[0]
-                            descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),
-                                vector[0],vector[0],vector[0]])
-                            print (descriptor)
-                            
+                            points = []
+
+                            for json_object in tmp_json.get ('points'):
+
+                                name=descriptors_list [json_object.get ('name')]
+                                vector=json_object.get ('vector')
+                                vector_on=json_object.get ('vector_on')
+
+                                if 'vector' and 'vector_on' in json_object.keys ():
+                                    if vector_on ==1:
+                                        for element in vector:
+                                            descriptor=([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'),element['x'], element['y'],element['z']])
+                                        points.append (descriptor)
+
+                                if 'vector' and 'vector_on' in json_object.keys ():
+                                    if vector_on ==0:
+                                        vector=[0]
+                                        descriptor=([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), vector[0],vector[0],vector[0]])
+                                        points.append (descriptor)
+
+                                if 'vector' and not 'vector_on' in json_object.keys ():
+                                    if vector!=None:
+                                        for element in vector:
+                                            descriptor = np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), element['x'], element['y'],element['z']])
+                                        points.append (descriptor)
+
+                                    if vector==None:
+                                        vector=[0]
+                                        descriptor= np.array ([name,json_object.get('x'),json_object.get('y'),json_object.get('z'),json_object.get ('radius'), vector[0],vector[0],vector[0]])
+                                        points.append (descriptor)
+
+                            points.append (descriptor)
+                            print (points)
+
         if all_points is False:
 
             pass
-        
-        def analyze ():
 
-        	for element in descriptor:
-        		print ('ok')
-        	pass
+        pass
 
+    def analyze (self,name='', method=''):
 
+        name    =   'all'
+        method  =   'kmeans'
 
+        if name is 'all':
+            for i in points:
+                print ('ok')
