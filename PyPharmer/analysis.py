@@ -156,7 +156,7 @@ class Descriptors:
 
         pass
 
-    def analyze (self,name='', method=''):
+    def self.points.show_points ():
 
         name    =   'all'
         method  =   'kmeans'
