@@ -1,6 +1,6 @@
 import numpy as np
 import simplejson as json
-from .viewer import get_nglview as _get_nglview
+from viewer import get_nglview as _get_nglview
 
 class Load:
 

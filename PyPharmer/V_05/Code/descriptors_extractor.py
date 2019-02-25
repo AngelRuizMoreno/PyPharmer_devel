@@ -4,7 +4,6 @@ from pprint import pprint
 import networkx as nx
 import itertools as it
 #from .viewer import  scatter_plot as _scatter_plot
-from .analysis import get_networkx as _get_networkx
 
 class Descriptors:
 
